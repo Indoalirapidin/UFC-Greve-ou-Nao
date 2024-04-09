@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFC Greve ou Não</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .odds {
+            margin-bottom: 20px;
+        }
+        .odds label {
+            display: block;
+            font-weight: bold;
+        }
+        .odds input {
+            margin-top: 5px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .stats {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>UFC Greve ou Não</h1>
+        <div class="odds">
+            <h2>Haverá uma greve na UFC?</h2>
+            <label>
+                <input type="checkbox" id="greveSim"> Sim
+            </label>
+            <label>
+                <input type="checkbox" id="greveNao"> Não
+            </label>
+        </div>
+        <button class="btn" onclick="placeBet()">Fazer Aposta</button>
+        
+        <div class="stats" id="statsSection" style="display:none;">
+            <h2>Estatísticas</h2>
+            <p>Porcentagem de apostas para Sim: <span id="percentSim"></span>%</p>
+            <p>Porcentagem de apostas para Não: <span id="percentNao"></span>%</p>
+        </div>
+    </div>
+
+    <script>
+        function placeBet() {
+            var greveSim = document.getElementById('greveSim').checked;
+            var greveNao = document.getElementById('greveNao').checked;
+            
+            if (greveSim && greveNao) {
+                alert("Por favor, selecione apenas uma opção.");
+            } else if (!greveSim && !greveNao) {
+                alert("Por favor, selecione uma opção.");
+            } else {
+                var chosenOption = greveSim ? "Sim" : "Não";
+                alert("Você apostou que haverá uma greve: " + chosenOption);
+                showStats();
+            }
+        }
+
+        function showStats() {
+            var greveSim = document.getElementById('greveSim').checked;
+            var greveNao = document.getElementById('greveNao').checked;
+            var totalVotes = greveSim + greveNao;
+
+            var percentSim = (greveSim / totalVotes * 100).toFixed(2);
+            var percentNao = (greveNao / totalVotes * 100).toFixed(2);
+
+            document.getElementById('percentSim').innerText = percentSim;
+            document.getElementById('percentNao').innerText = percentNao;
+
+            document.getElementById('statsSection').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
